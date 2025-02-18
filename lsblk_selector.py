@@ -27,7 +27,6 @@ def run_lsblk(device):
     command = f'lsblk -J -o NAME,SIZE,TYPE,MOUNTPOINT'
     output = run_command(command)
     devices = json.loads(output)['blockdevices']
-    print(f"output: {devices}")
     for parent in devices:
         if parent['name'] == device:
             return parent
