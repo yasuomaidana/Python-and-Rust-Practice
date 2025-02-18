@@ -5,4 +5,8 @@ RUN apk add --no-cache util-linux
 
 # Install dependencies
 COPY requirements.txt .
+COPY blkpy/ blkpy/
+COPY lsblk_selector.py .
+COPY setup.py .
 RUN pip install -r requirements.txt
+RUN if [ "$INSTALL_MODE" = "develop" ]; then python setup.py develop; else python setup.py install; fi
