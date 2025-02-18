@@ -21,5 +21,7 @@ def main(device, verbose):
                 fg='red'))
         else:
             print(f"Sorry, couldn't find the file: \n\t{e}")
+        if verbose:
+            raise e
     except Exception as e:
         print(f"Sorry, something went wrong. IDK and IDC.{e}, type: {type(e)}")
