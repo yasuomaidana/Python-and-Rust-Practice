@@ -2,7 +2,7 @@ build_image:
 	@echo "Building image..."
 	docker build -t blk-rust .
 
-build:
+dev:
 	@echo "Building project..."
 	docker run --name blk-rust-container -it --rm -v $(PWD):/app -w /app blk-rust /bin/sh
 	# --rm deletes the container after it's done running
