@@ -9,7 +9,8 @@ build:
 	#docker run --name blk-rust-container -it -v $(PWD):/app -w /app blk-rust /bin/sh
 
 build_release:
-	docker build -t blk-rust-release -f release-dockerfile .
+	cargo fmt
+	cargo clippy -- -D warnings # -D warnings means show all warnings as errors
 
 run_release:
 	docker run --name blk-rust-release-container -it --rm blk-rust-release
