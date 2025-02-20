@@ -11,6 +11,7 @@ build:
 build_release:
 	cargo fmt
 	cargo clippy -- -D warnings # -D warnings means show all warnings as errors
+	DOCKER_BUILDKIT=1 docker build -t blk-rust-release -f release-dockerfile .
 
 run_release:
 	docker run --name blk-rust-release-container -it --rm blk-rust-release
