@@ -3,7 +3,7 @@ use serde_json::Value;
 
 pub fn run_lsblk(device: &str) -> Result<Value, String> {
     let command = "lsblk -J -o NAME,SIZE,TYPE,MOUNTPOINT";
-    match run_command(&command) {
+    match run_command(command) {
         Ok(output) => match serde_json::from_str::<Value>(&output) {
             Ok(devices) => match devices["blockdevices"].as_array() {
                 Some(blockdevices) => {
