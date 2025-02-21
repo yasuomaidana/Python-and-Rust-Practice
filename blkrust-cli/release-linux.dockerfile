@@ -15,4 +15,10 @@ FROM alpine:latest
 RUN apk add --no-cache util-linux
 WORKDIR /app
 COPY --from=builder /app/target/aarch64-unknown-linux-musl/release/blkrust-cli ./
+# This command uses the install utility to copy the blkrust-cli binary 
+# from the current directory to /usr/local/bin/ with the specified permissions. 
+# The -m 755 option sets the file permissions to 755, which means the owner can read, 
+# write, and execute the file, while others can only read and execute it. 
+# This makes the blkrust-cli binary executable from anywhere in the system.
+RUN install -m 755 blkrust-cli /usr/local/bin/blkrust-cli
 ENTRYPOINT ["sh"]  
