@@ -1,4 +1,4 @@
-use crate::cli_parser::command::InfoOpts;
+use crate::cli_parser::command::{InfoOpts, TimeOpts};
 use clap::{ArgAction, Parser};
 
 #[derive(Parser, Debug)]
@@ -22,4 +22,6 @@ pub struct Opts {
 pub(crate) enum Command {
     #[clap(name = "info", about = "Get info about a device")]
     Info(InfoOpts),
+    #[clap(name = "time", about = "Get the current time")]
+    Time(TimeOpts),
 }
