@@ -1,4 +1,6 @@
-use crate::cli_parser::command::{InfoOpts, TimeOpts};
+use crate::cli_parser::command::info::InfoOpts;
+use crate::cli_parser::command::print_file::PrintFileOpts;
+use crate::cli_parser::command::time::TimeOpts;
 use crate::lsblk;
 use clap::{ArgAction, Parser};
 
@@ -30,6 +32,8 @@ pub(crate) enum Command {
     Info(InfoOpts),
     #[clap(name = "time", about = "Get the current time")]
     Time(TimeOpts),
+    #[clap(name = "print", about = "Print the content of a file")]
+    PrintFile(PrintFileOpts),
 }
 
 impl Command {
@@ -45,6 +49,18 @@ impl Command {
             }
             Command::Time(time) => {
                 println!("Now is: {}", time.format);
+            }
+            Command::PrintFile(file) => {
+                if !file.file.exists() {
+                    eprintln!("File {:?} does not exist", file.file);
+                    return;
+                } else {
+                    let content = std::fs::read_to_string(&file.file);
+                    match content {
+                        Ok(content) => println!("{}", content),
+                        Err(error) => eprintln!("Failed to read file {:?}: {}", file.file, error),
+                    }
+                }
             }
         }
     }
