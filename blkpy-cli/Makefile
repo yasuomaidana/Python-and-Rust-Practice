@@ -3,7 +3,7 @@ c_python_image:
 c_python_image_prod:
 	docker build --build-arg -t python_rust_practice_image .
 dev:
-	docker build --build-arg INSTALL_MODE=develop -t python_rust_practice_dev_image -f dev.dockerfile .
+	DOCKER_BUILDKIT=1 docker build --build-arg INSTALL_MODE=develop -t python_rust_practice_dev_image -f dev.dockerfile .
 	#docker run -it --rm --name python_rust_practice_container python_rust_practice_imag	
 	# --rm: remove container after exit
 	#docker run -it --rm --name dev_container -v $(PWD):/app -w /app python_rust_practice_dev_image sh
