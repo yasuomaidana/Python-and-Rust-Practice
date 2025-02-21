@@ -1,6 +1,6 @@
 import click
 
-from .commands import info, nice, show_time
+from .commands import info, nice, show_time, print_file
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
@@ -32,6 +32,8 @@ def main(ctx, verbose, debug_level):
 #     print(f"Device: {device}")
 #     print(f"Verbose: {verbose}")
 #     blk_run(device, verbose)
+
 main.add_command(info)
 main.add_command(nice)
 main.add_command(show_time)
+main.add_command(print_file)
