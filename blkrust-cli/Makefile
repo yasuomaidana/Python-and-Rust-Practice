@@ -23,3 +23,12 @@ build_linux:
 
 run_linux: build_linux
 	DOCKER_BUILDKIT=1 docker run --name blk-rust-linux-container -it --rm blk-rust-linux
+
+build_linux_keep:
+	DOCKER_BUILDKIT=1 docker build -t keep-blk-rust-linux -f keep.dockerfile .
+	docker run --name keep-blk-rust-linux-container keep-blk-rust-linux
+	docker cp keep-blk-rust-linux-container:/app/target/aarch64-unknown-linux-musl/release/blkrust-cli ./output/
+	docker rm keep-blk-rust-linux-container
+	docker image rm keep-blk-rust-linux
+	
+	
