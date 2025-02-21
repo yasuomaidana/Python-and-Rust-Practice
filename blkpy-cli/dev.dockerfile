@@ -16,4 +16,5 @@ RUN pip install -r requirements.txt
 # After the setup script completes, it keeps the shell open (&& sh), allowing for interactive use or further commands.
 # The -c option in the ENTRYPOINT instruction specifies that the following string is a command to be executed by the shell (sh). 
 # In this case, it allows the shell to run the command python setup.py develop && sh.
-ENTRYPOINT ["sh", "-c", "python setup.py develop && sh"]
+#ENTRYPOINT ["sh", "-c", "python setup.py develop && sh"] old way
+ENTRYPOINT ["sh", "-c", "pip install -e .  && sh"]
