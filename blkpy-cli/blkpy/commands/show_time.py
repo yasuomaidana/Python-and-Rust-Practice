@@ -5,6 +5,7 @@ import click
 
 @click.command(name="time", short_help='Show current time in a given format')
 @click.option('--format', '-f', 'time_format',
+              envvar='TIME_FORMAT',
               type=click.Choice(['default', 'rfc3339']),
               help="Defines the format of the output"
     , default='default')
