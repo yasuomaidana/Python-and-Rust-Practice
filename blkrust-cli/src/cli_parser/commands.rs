@@ -1,11 +1,16 @@
 use crate::cli_parser::command::{InfoOpts, TimeOpts};
-use clap::{ArgAction, Parser};
 use crate::lsblk;
+use clap::{ArgAction, Parser};
 
 #[derive(Parser, Debug)]
 #[command(author = "Yo mero",version, about="A rust lsbk tool", long_about = None)]
 pub struct Opts {
-    #[clap(short, long, help = "Prints debug information", default_value_t = false)]
+    #[clap(
+        short,
+        long,
+        help = "Prints debug information",
+        default_value_t = false
+    )]
     // #[clap(short, long, help = "Prints debug information", env = "BLKRS_DEBUG", default_value = "true")]
     pub debug: bool,
 
