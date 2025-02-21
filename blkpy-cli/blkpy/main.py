@@ -3,11 +3,14 @@ from subprocess import CalledProcessError
 import click
 from lsblk_selector import run_lsblk
 
+@click.group()
+def main():
+    pass
 
-@click.command()
+@main.command()
 @click.option('--verbose', '-v', is_flag=True)
 @click.argument('device')
-def main(device, verbose):
+def info(device, verbose):
     print(f"Device: {device}")
     print(f"Verbose: {verbose}")
     try:
