@@ -17,3 +17,9 @@ build_release:
 
 run_release: build_release
 	docker run --name blk-rust-release-container -it --rm blk-rust-release
+
+build_linux:
+	DOCKER_BUILDKIT=1 docker build -t blk-rust-linux -f release-linux.dockerfile .
+
+run_linux: build_linux
+	DOCKER_BUILDKIT=1 docker run --name blk-rust-linux-container -it --rm blk-rust-linux
