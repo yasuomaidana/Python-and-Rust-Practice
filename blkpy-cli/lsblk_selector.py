@@ -1,6 +1,7 @@
 import subprocess
 import shlex
 import json
+from pprint import pprint
 
 
 # create a function that runs subprocess and returns the output
@@ -9,7 +10,7 @@ def run_command(command):
     output = subprocess.check_output(cmd)
     return output
 
-def run_lsblk(device):
+def run_lsblk(device:str, verbose:bool=False):
     """
     Runs lsblk command and produces JSON output:
 
@@ -29,9 +30,13 @@ def run_lsblk(device):
     devices = json.loads(output)['blockdevices']
     for parent in devices:
         if parent['name'] == device:
+            if verbose:
+                return pprint(parent)
             return parent
         for child in parent.get('children', []):
             if child['name'] == device:
+                if verbose:
+                    return pprint(child)
                 return child
 
 
