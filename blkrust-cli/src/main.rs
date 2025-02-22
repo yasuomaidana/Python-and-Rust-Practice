@@ -4,18 +4,21 @@ use clap::Parser;
 mod cli_parser;
 mod command_runner;
 mod lsblk;
+use env_logger::Env;
 
 fn main() {
     let args = Opts::parse();
 
-    println!("Debug: {}", args.debug);
-
-    match args.verbose_level {
-        0 => println!("Verbose level: None"),
-        1 => println!("Verbose level: Low"),
-        2 => println!("Verbose level: Medium"),
-        3 => println!("Verbose level: High"),
-        _ => println!("Verbose level: Too much"),
+    env_logger::Builder::from_env(Env::default().default_filter_or(match args.verbose_level {
+        0 => "error",
+        1 => "warn",
+        2 => "info",
+        3 => "debug",
+        _ => "trace",
+    }))
+    .init();
+    if args.debug{
+        log::debug!("Debugging enabled");
     }
 
     args.cmd.run();

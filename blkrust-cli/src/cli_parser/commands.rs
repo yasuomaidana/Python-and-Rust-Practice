@@ -3,6 +3,8 @@ use crate::cli_parser::command::print_file::PrintFileOpts;
 use crate::cli_parser::command::time::TimeOpts;
 use crate::lsblk;
 use clap::{ArgAction, Parser};
+use crate::lsblk::Error;
+use log::{info, warn, error};
 
 #[derive(Parser, Debug)]
 #[command(author = "Yo mero",version, about="A rust lsbk tool", long_about = None)]
@@ -44,7 +46,19 @@ impl Command {
                 println!("Device: {}", device);
                 match lsblk::run_lsblk(device) {
                     Ok(device) => println!("{}", device),
-                    Err(error) => eprintln!("{}", error),
+                    Err(error) => { 
+                        match error {
+                            Error::ParseError(message) => {
+                                warn!("{}", message);
+                            }
+                            Error::NotFound(message) => {
+                                info!("{}", message);
+                            }
+                            Error::CommandError(message) => {
+                                error!("{}", message);
+                            }
+                        }
+                    },
                 }
             }
             Command::Time(time) => {

@@ -1,7 +1,13 @@
 use crate::command_runner::run_command;
 use serde_json::Value;
 
-pub fn run_lsblk(device: &str) -> Result<Value, String> {
+pub enum Error {
+    ParseError(String),
+    NotFound(String),
+    CommandError(String),
+}
+
+pub fn run_lsblk(device: &str) -> Result<Value, Error> {
     let command = "lsblk -J -o NAME,SIZE,TYPE,MOUNTPOINT";
     match run_command(command) {
         Ok(output) => match serde_json::from_str::<Value>(&output) {
@@ -19,12 +25,18 @@ pub fn run_lsblk(device: &str) -> Result<Value, String> {
                             }
                         }
                     }
-                    Err(format!("Device {} not found in lsblk output", device))
+                    Err(Error::NotFound(format!("Device {} not found", device)))
                 }
-                None => Err("Failed to parse blockdevices array".to_string()),
+                None => Err(Error::ParseError("Failed to parse blockdevices array".into())),
             },
-            Err(error) => Err(format!("Failed to parse lsblk output: {}", error)),
+            Err(error) => Err(Error::ParseError(format!(
+                "Failed to parse lsblk output: {}",
+                error
+            ))),
         },
-        Err(error) => Err(format!("Failed to run lsblk command 😭 {error}")),
+        Err(error) => Err(Error::CommandError(format!(
+            "Failed to run lsblk command: {}",
+            error
+        ))),
     }
 }
