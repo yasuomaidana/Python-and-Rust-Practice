@@ -1,10 +1,11 @@
+use std::fs::OpenOptions;
 use crate::cli_parser::commands::Opts;
 use clap::Parser;
 
 mod cli_parser;
 mod command_runner;
 mod lsblk;
-use env_logger::Env;
+use env_logger::{Env, Target};
 
 fn main() {
     let args = Opts::parse();
@@ -16,6 +17,20 @@ fn main() {
         3 => "debug",
         _ => "trace",
     }))
+        .target({
+            if args.logfile {
+                let file = OpenOptions::new()
+                    .create(true)
+                    .write(true)
+                    .truncate(true)
+                    .open("blkrs.log")
+                    .expect("Failed to open log file");
+                Target::Pipe(Box::new(file))
+            } else {
+                Target::Stdout
+            }
+        })
+        
     .init();
     if args.debug{
         log::debug!("Debugging enabled");

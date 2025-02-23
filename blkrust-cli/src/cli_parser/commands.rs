@@ -15,9 +15,10 @@ pub struct Opts {
         help = "Prints debug information",
         default_value_t = false
     )]
-    // #[clap(short, long, help = "Prints debug information", env = "BLKRS_DEBUG", default_value = "true")]
     pub debug: bool,
 
+    #[clap(short, long, help = "Writes into a file", env = "BLKRS_LOGFILE", default_value = "true")]
+    pub logfile: bool,
     #[clap(short, long, action = ArgAction::Count, help = "Defines the level of verbosity"
     )]
     // default value without defining it is zero
