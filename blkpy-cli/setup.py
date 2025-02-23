@@ -7,6 +7,7 @@ setup(
     name='blkpy-demo',
     description='A demo package for blkpy to list block devices',
     packages=find_packages(),
+    py_modules=['lsblk_selector'],
     author='Yo el mero mero',
     entry_points = """
         [console_scripts]

@@ -11,4 +11,17 @@ dev:
 install_dev:
 	@pip show setuptools > /dev/null || pip install setuptools
 	pip install -r requirements.txt
-	python setup.py develop
+	# python setup.py develop old way
+	python -m pip install -e .
+
+build:
+	# python setup.py --help-commands | grep wheel
+	# python setup.py bdist_wheel old way
+	python -m build --wheel
+
+run_build:build
+	DOCKER_BUILDKIT=1 docker build -t python-dist-image -f release.dockerfile .
+	docker run -it --rm --name python-dist-container python-dist-image
+	docker image rm python-dist-image
+clean:
+	rm *.log

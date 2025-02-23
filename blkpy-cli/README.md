@@ -21,6 +21,23 @@ To access the Python container, you can run the following command:
 docker exec -it <mycontainer> sh
 ```
 
-## Activate container Python environment
+[//]: # (## Activate container Python environment)
 
+## Logging levels
 
+| Level    |  Numeric value  |
+|----------|:---------------:|
+| CRITICAL |       50        |
+| ERROR    |       40        |
+| WARNING  |       30        |
+| INFO     |       20        |
+| DEBUG    |       10        |
+| NOTSET   |        0        |
+
+| Level     | When it’s used                                                                                       |
+|-----------|------------------------------------------------------------------------------------------------------|
+| DEBUG     | Detailed information, typically of interest only when diagnosing problems.                           |
+| INFO      | Confirmation that things are working as expected.                                                    |
+| WARNING   | An indication that something unexpected happened, or indicative of some problem in the near future.  |
+| ERROR     | Due to a more serious problem, the software has not been able to perform some function.              |
+| CRITICAL  | A serious error, indicating that the program itself may be unable to continue running.               |
