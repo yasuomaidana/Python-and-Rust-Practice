@@ -17,7 +17,7 @@ pub struct Opts {
     )]
     pub debug: bool,
 
-    #[clap(short, long, help = "Writes into a file", env = "BLKRS_LOGFILE", default_value = "true")]
+    #[clap(short, long, help = "Writes into a file", env = "BLKRS_LOGFILE", default_value = "false")]
     pub logfile: bool,
     #[clap(short, long, action = ArgAction::Count, help = "Defines the level of verbosity"
     )]
