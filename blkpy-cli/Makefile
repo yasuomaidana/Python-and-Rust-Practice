@@ -23,4 +23,5 @@ run_build:build
 	DOCKER_BUILDKIT=1 docker build -t python-dist-image -f release.dockerfile .
 	docker run -it --rm --name python-dist-container python-dist-image
 	docker image rm python-dist-image
-	
+clean:
+	rm *.log
