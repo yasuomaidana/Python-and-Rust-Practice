@@ -3,4 +3,10 @@ name = "digits-pi"
 version = "0.1.0"
 edition = "2021"
 
+[lib]
+crate-type = ["cdylib"]
+name = "digits_pi"
+
 [dependencies]
+pyo3 = "0.23.5"
+rayon = "1.10.0"

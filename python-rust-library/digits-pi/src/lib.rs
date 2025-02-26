@@ -1,5 +1,5 @@
 use pyo3::prelude::*;
-use pyo3::{pyfunction, wrap_pyfunction, PyResult, Python};
+use pyo3::{pyfunction, wrap_pyfunction, PyResult};
 use rayon::iter::IntoParallelIterator;
 use rayon::iter::ParallelIterator;
 
@@ -18,11 +18,11 @@ fn calculate_pi(iterations: u32) -> PyResult<f64> {
     Ok(pi)
 }
 
-// #[pymodule]
-// fn lib_pi_digits(py: Python<'_>, m: &PyModule) -> PyResult<()> {
-//     m.add_function(wrap_pyfunction!(calculate_pi, py)?)?;
-//     Ok(())
-// }
+#[pymodule]
+fn digits_pi(m: &Bound<'_, PyModule>) -> PyResult<()> {
+    m.add_function(wrap_pyfunction!(calculate_pi, m)?)?;
+    Ok(())
+}
 
 #[cfg(test)]
 mod tests {
