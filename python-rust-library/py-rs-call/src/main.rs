@@ -1,3 +1,5 @@
+mod test_function_calling;
+
 use pyo3::prelude::*;
 use pyo3::prepare_freethreaded_python;
 
