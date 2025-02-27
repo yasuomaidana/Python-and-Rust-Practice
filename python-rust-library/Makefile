@@ -8,3 +8,4 @@ run_test:
 run_python_from_rust:
 	@echo "Running Python from Rust"
 	cd py-rs-call && PYTHONPATH=../.venv/lib/python3.12/site-packages cargo run --
+	cd py-rs-call && PYTHONPATH=../.venv/lib/python3.12/site-packages cargo test --color=always
