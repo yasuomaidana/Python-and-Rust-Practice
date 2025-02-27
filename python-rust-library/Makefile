@@ -5,3 +5,6 @@ create_lib:
 run_test:
 	@echo "Running all Python tests"
 	python -m unittest discover
+run_python_from_rust:
+	@echo "Running Python from Rust"
+	cd py-rs-call && PYTHONPATH=../.venv/lib/python3.12/site-packages cargo run --
