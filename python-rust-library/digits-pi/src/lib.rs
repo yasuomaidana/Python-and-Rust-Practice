@@ -1,12 +1,12 @@
 mod number_list;
 
-use std::collections::{HashMap, HashSet};
+use crate::number_list::NumbersList;
 use pyo3::prelude::*;
 use pyo3::types::PyDict;
 use pyo3::{pyfunction, wrap_pyfunction, PyResult};
 use rayon::iter::IntoParallelIterator;
 use rayon::iter::ParallelIterator;
-use crate::number_list::NumbersList;
+use std::collections::{HashMap, HashSet};
 
 /// Calculate the value of π using the Leibniz with  Shanks transformation formula.
 #[pyfunction]
@@ -42,10 +42,36 @@ fn data_types(py: Python<'_>) -> PyResult<PyObject> {
     Ok(dict.into())
 }
 
+#[pyfunction]
+/// Divide two numbers.
+///
+/// # Arguments
+///
+/// * `a` - The numerator.
+/// * `b` - The denominator.
+///
+/// # Returns
+///
+/// * `PyResult<i32>` - The result of the division if successful, or a `PyZeroDivisionError` if the denominator is zero.
+///
+/// # Errors
+///
+/// * `PyZeroDivisionError` - If the denominator is zero.
+fn divide(a: f64, b: f64) -> PyResult<f64> {
+    if b == 0.0 {
+        Err(pyo3::exceptions::PyZeroDivisionError::new_err(
+            "division by zero",
+        ))
+    } else {
+        Ok(a / b)
+    }
+}
+
 #[pymodule]
 fn digits_pi(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(calculate_pi, m)?)?;
     m.add_function(wrap_pyfunction!(data_types, m)?)?;
+    m.add_function(wrap_pyfunction!(divide, m)?)?;
     m.add_class::<NumbersList>()?;
     Ok(())
 }
