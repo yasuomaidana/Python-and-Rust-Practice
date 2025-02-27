@@ -1,6 +1,8 @@
+use pyo3::pyclass;
 use rayon::iter::IntoParallelRefIterator;
 use rayon::iter::ParallelIterator;
 
+#[pyclass]
 pub struct NumbersList {
     numbers: Vec<i32>,
 }
@@ -20,6 +22,14 @@ impl NumbersList {
         } else {
             self.numbers.par_iter().sum()
         }
+    }
+    
+    pub fn clear(&mut self) {
+        self.numbers.clear();
+    }
+    
+    pub fn add(&mut self, number: i32) {
+        self.numbers.push(number);
     }
 }
 
