@@ -1,4 +1,4 @@
-use pyo3::pyclass;
+use pyo3::{pyclass, pymethods};
 use rayon::iter::IntoParallelRefIterator;
 use rayon::iter::ParallelIterator;
 
@@ -7,7 +7,9 @@ pub struct NumbersList {
     numbers: Vec<i32>,
 }
 
+#[pymethods]
 impl NumbersList {
+    #[new]
     pub fn new() -> NumbersList {
         NumbersList {
             numbers: Vec::new(),
