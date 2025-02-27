@@ -1,9 +1,12 @@
+mod number_list;
+
 use std::collections::{HashMap, HashSet};
 use pyo3::prelude::*;
 use pyo3::types::PyDict;
 use pyo3::{pyfunction, wrap_pyfunction, PyResult};
 use rayon::iter::IntoParallelIterator;
 use rayon::iter::ParallelIterator;
+use crate::number_list::NumbersList;
 
 /// Calculate the value of π using the Leibniz with  Shanks transformation formula.
 #[pyfunction]
@@ -43,6 +46,7 @@ fn data_types(py: Python<'_>) -> PyResult<PyObject> {
 fn digits_pi(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(calculate_pi, m)?)?;
     m.add_function(wrap_pyfunction!(data_types, m)?)?;
+    m.add_class::<NumbersList>()?;
     Ok(())
 }
 
