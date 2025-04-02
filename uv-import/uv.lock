@@ -2,15 +2,27 @@ version = 1
 requires-python = ">=3.12"
 
 [[package]]
+name = "rupy-uv"
+version = "0.1.0"
+source = { path = "../rupy-uv/dist/rupy_uv-0.1.0-cp39-abi3-macosx_11_0_arm64.whl" }
+wheels = [
+    { filename = "rupy_uv-0.1.0-cp39-abi3-macosx_11_0_arm64.whl", hash = "sha256:f78b3d8c60a8368c426c16f5e8ec9df7c0dc5dde3159f1d47835c0b76cb7587f" },
+]
+
+[[package]]
 name = "uv-import"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "rupy-uv" },
     { name = "uv-lib" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "uv-lib", path = "../uv-lib/dist/uv_lib-0.1.0-py3-none-any.whl" }]
+requires-dist = [
+    { name = "rupy-uv", path = "../rupy-uv/dist/rupy_uv-0.1.0-cp39-abi3-macosx_11_0_arm64.whl" },
+    { name = "uv-lib", path = "../uv-lib/dist/uv_lib-0.1.0-py3-none-any.whl" },
+]
 
 [[package]]
 name = "uv-lib"

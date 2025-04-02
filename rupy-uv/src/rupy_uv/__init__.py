@@ -1,4 +1,4 @@
-from rupy_uv._core import hello_from_bin
+from rupy_uv._core import custom_divide
 
 def main() -> None:
-    print(hello_from_bin())
+    print(custom_divide(2,2))
