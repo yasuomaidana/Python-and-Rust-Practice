@@ -1,0 +1,40 @@
+[project]
+name = "uv-import"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+
+authors = [
+    { name = "yasuomaidana" }
+]
+
+dependencies = [
+    "rupy-uv",
+    "uv-lib",
+]
+
+[tool.uv.sources]
+uv-lib = { path = "../uv-lib/dist/uv_lib-0.1.0-py3-none-any.whl" }
+rupy-uv = { path = "../rupy-uv/dist/rupy_uv-0.1.0-cp39-abi3-macosx_11_0_arm64.whl" }
+
+####### Required to use hatchling
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.11.2",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+####### ----------
+
+#[build-system]
+#requires = ["setuptools>=42", "wheel"]
+#build-backend = "setuptools.build_meta"
+
+[project.scripts]
+uv-main = "main:main"
