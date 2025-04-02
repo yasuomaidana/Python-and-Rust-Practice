@@ -1,3 +1,1 @@
 from __future__ import annotations
-
-def custom_divide(a,b) -> str: ...

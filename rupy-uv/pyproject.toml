@@ -9,8 +9,8 @@ authors = [
 requires-python = ">=3.12"
 dependencies = []
 
-[project.scripts]
-rupy-uv = "rupy_uv:main"
+#[project.scripts]
+#rupy-uv = "rupy_uv:main"
 
 [tool.maturin]
 module-name = "rupy_uv._core"

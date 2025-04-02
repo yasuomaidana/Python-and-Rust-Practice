@@ -1,5 +1,5 @@
 from uv_lib import custom_sum
-from rupy_uv._core import custom_divide
+from rupy_uv._core import custom_divide, custom_sum
 
 def main():
     print("This is the main function.")
