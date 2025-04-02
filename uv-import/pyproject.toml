@@ -4,4 +4,14 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+
+authors = [
+    { name = "yasuomaidana" }
+]
+
+dependencies = [
+    "uv-lib",
+]
+
+[tool.uv.sources]
+uv-lib = { path = "../uv-lib/dist/uv_lib-0.1.0-py3-none-any.whl" }
